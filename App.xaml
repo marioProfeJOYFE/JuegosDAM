@@ -3,35 +3,55 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:JuegosDAM"
              StartupUri="MainWindow.xaml">
-    <Application.Resources>
+   <Application.Resources>
+        
+        <SolidColorBrush x:Key="TextPrimaryBrush" Color="#3D4B6E"/>
+        <SolidColorBrush x:Key="TextSecondaryBrush" Color="#667490"/>
+        <SolidColorBrush x:Key="GlassBackground" Color="#40FFFFFF"/>
+        <SolidColorBrush x:Key="GlassBorder" Color="#60FFFFFF"/>
 
-        <SolidColorBrush x:Key="TextPrimaryBrush" Color="#3D4B6E" />
-        <SolidColorBrush x:Key="TextSecondaryBrush" Color="#667490" />
-        <SolidColorBrush x:Key="GlassBackground" Color="#40FFFFFF" />
-        <SolidColorBrush x:Key="GlassBorder" Color="#60FFFFFF" />
-
-        <DropShadowEffect x:Key="GlassShadow" 
-                          BlurRadius="15" 
-                          ShadowDepth="5" 
-                          Direction="270" 
-                          Color="Black" 
-                          Opacity="0.15" />
+        <DropShadowEffect x:Key="SoftShadow" BlurRadius="15" ShadowDepth="5" Direction="270" Color="Black" Opacity="0.15"/>
 
         <Style x:Key="GlassPanelStyle" TargetType="Border">
             <Setter Property="Background" Value="{StaticResource GlassBackground}"/>
-            <Setter Property="BorderBrush" Value="{StaticResource GlassBorder}" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="CornerRadius" Value="25" />
-            <Setter Property="Effect" Value="{StaticResource GlassShadow}" />
+            <Setter Property="BorderBrush" Value="{StaticResource GlassBorder}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="25"/>
+            <Setter Property="Effect" Value="{StaticResource SoftShadow}"/>
         </Style>
 
         <Style x:Key="TitleTextStyle" TargetType="TextBlock">
-            <Setter Property="FontFamily" Value="Segoe UI" />
-            <Setter Property="FontSize" Value="28" />
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}" />
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize" Value="28"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}"/>
         </Style>
-        
-        
+
+        <Style x:Key="SubtitleTextStyle" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Foreground" Value="{StaticResource TextSecondaryBrush}"/>
+        </Style>
+
+        <Style x:Key="NavButtonStyle" TargetType="Border">
+            <Setter Property="Width" Value="60"/>
+            <Setter Property="Height" Value="60"/>
+            <Setter Property="CornerRadius" Value="20"/>
+            <Setter Property="Effect" Value="{StaticResource SoftShadow}"/>
+            <Setter Property="Margin" Value="0,0,15,0"/>
+        </Style>
+
+        <Style x:Key="GamePlaceholderStyle" TargetType="StackPanel">
+            <Setter Property="Margin" Value="15"/>
+            <Setter Property="Width" Value="110"/>
+        </Style>
+
+        <Style x:Key="GameCoverPlaceholderStyle" TargetType="Border">
+            <Setter Property="Height" Value="110"/>
+            <Setter Property="CornerRadius" Value="25"/>
+            <Setter Property="Effect" Value="{StaticResource SoftShadow}"/>
+            <Setter Property="Margin" Value="0,0,0,15"/>
+        </Style>
+
     </Application.Resources>
 </Application>
