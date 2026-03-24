@@ -13,6 +13,18 @@
                 <GradientStop Color="#1A436A" Offset="1.0"/>
             </LinearGradientBrush>
         </Border.Background>
+        
+        <Border.Style>
+            <Style TargetType="Border">
+                <Setter Property="CornerRadius" Value="30"/>
+                
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding WindowState, RelativeSource={RelativeSource AncestorType=Window}}" Value="Maximized">
+                        <Setter Property="CornerRadius" Value="0"/>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Border.Style>
 
         <Grid Margin="15">
             <Grid.ColumnDefinitions>
@@ -32,7 +44,12 @@
 
                     <Border Grid.Row="0" Style="{StaticResource GlassPanelStyle}" CornerRadius="20" Padding="10" Margin="0,0,0,30">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                            <Ellipse Width="50" Height="50" Fill="#444" Margin="0,0,15,0"/>
+                            <Ellipse Width="50" Height="50" Margin="0,0,15,0">
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="https://upload.wikimedia.org/wikipedia/commons/d/d7/Cristiano_Ronaldo_playing_for_Al_Nassr_FC_against_Persepolis%2C_September_2023_%28cropped%29.jpg"
+                                                Stretch="UniformToFill"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
                             <StackPanel VerticalAlignment="Center">
                                 <TextBlock Text="Mario Ríos" FontSize="16" FontWeight="Bold" Foreground="{StaticResource TextPrimaryBrush}"/>
                                 <TextBlock Text="Cuenta Premium" FontSize="11" Foreground="#9C527B"/>
