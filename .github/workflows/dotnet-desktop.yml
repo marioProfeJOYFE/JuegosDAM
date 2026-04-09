@@ -39,9 +39,8 @@ jobs:
 
     - name: Compilar Instalador con Inno Setup
       if: matrix.configuration == 'Release'
-      uses: minicomp/inno-setup-action@v1
+      uses: Minionguyjpro/Inno-Setup-Action@v1.2.7
       with:
-        # Nota: Los steps con "uses" se ejecutan desde la raíz, por eso le pasamos la ruta completa
         path: marioprofejoyfe/juegosdam/JuegosDAM-final/instalador.iss
 
     - name: Subir Artefacto (Instalador)
