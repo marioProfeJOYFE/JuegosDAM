@@ -10,13 +10,9 @@ jobs:
   build:
     runs-on: windows-latest
     
-    defaults:
-      run:
-        working-directory: ./marioprofejoyfe/juegosdam/JuegosDAM-final
-
     strategy:
       matrix:
-        configuration: [Debug, Release]
+        configuration: [Release] # Quitamos Debug para que solo haga el instalador final
 
     steps:
     - name: Checkout del código
@@ -33,20 +29,18 @@ jobs:
     - name: Compilar el proyecto
       run: dotnet build --configuration ${{ matrix.configuration }} --no-restore
 
-    - name: Publicar la aplicación (Solo Release)
-      if: matrix.configuration == 'Release'
+    - name: Publicar la aplicación
       run: dotnet publish -c Release -o ./publish /p:UseAppHost=true
 
     - name: Compilar Instalador con Inno Setup
-      if: matrix.configuration == 'Release'
       uses: Minionguyjpro/Inno-Setup-Action@v1.2.7
       with:
-        path: marioprofejoyfe/juegosdam/JuegosDAM-final/instalador.iss
+        # Busca el archivo instalador.iss en la raíz del repositorio
+        path: instalador.iss
 
     - name: Subir Artefacto (Instalador)
-      if: matrix.configuration == 'Release'
       uses: actions/upload-artifact@v4
       with:
         name: JuegosDAM-Setup
-        # Ruta donde Inno Setup generó el .exe, basándose en la configuración del .iss
-        path: ./marioprofejoyfe/juegosdam/JuegosDAM-final/Output/JuegosDAM_Setup.exe
+        # Busca el .exe generado en la carpeta Output
+        path: Output/JuegosDAM_Setup.exe
