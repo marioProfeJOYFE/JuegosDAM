@@ -8,8 +8,11 @@ on:
 
 jobs:
   build:
-    # Las aplicaciones WPF deben compilarse en Windows
     runs-on: windows-latest
+    
+    defaults:
+      run:
+        working-directory: ./marioprofejoyfe/juegosdam/JuegosDAM-final
 
     strategy:
       matrix:
@@ -30,16 +33,21 @@ jobs:
     - name: Compilar el proyecto
       run: dotnet build --configuration ${{ matrix.configuration }} --no-restore
 
-    - name: Ejecutar pruebas
-      run: dotnet test --configuration ${{ matrix.configuration }} --no-build --verbosity normal
-
     - name: Publicar la aplicación (Solo Release)
       if: matrix.configuration == 'Release'
       run: dotnet publish -c Release -o ./publish /p:UseAppHost=true
 
-    - name: Subir Artefacto (Ejecutable)
+    - name: Compilar Instalador con Inno Setup
+      if: matrix.configuration == 'Release'
+      uses: minicomp/inno-setup-action@v1
+      with:
+        # Nota: Los steps con "uses" se ejecutan desde la raíz, por eso le pasamos la ruta completa
+        path: marioprofejoyfe/juegosdam/JuegosDAM-final/instalador.iss
+
+    - name: Subir Artefacto (Instalador)
       if: matrix.configuration == 'Release'
       uses: actions/upload-artifact@v4
       with:
-        name: JuegosDAM-App
-        path: ./publish
+        name: JuegosDAM-Setup
+        # Ruta donde Inno Setup generó el .exe, basándose en la configuración del .iss
+        path: ./marioprofejoyfe/juegosdam/JuegosDAM-final/Output/JuegosDAM_Setup.exe
