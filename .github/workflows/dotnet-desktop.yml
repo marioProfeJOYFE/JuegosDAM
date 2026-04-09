@@ -2,9 +2,9 @@ name: .NET Desktop CI
 
 on:
   push:
-    branches: [ "main", "master" ]
+    branches: [ "final" ]
   pull_request:
-    branches: [ "main", "master" ]
+    branches: [ "final" ]
 
 jobs:
   build:
