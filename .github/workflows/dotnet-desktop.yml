@@ -1,0 +1,47 @@
+name: .NET Desktop CI
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  build:
+    # Las aplicaciones WPF deben compilarse en Windows
+    runs-on: windows-latest
+
+    strategy:
+      matrix:
+        configuration: [Debug, Release]
+
+    steps:
+    - name: Checkout del código
+      uses: actions/checkout@v4
+
+    - name: Configurar .NET 8.0
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Restaurar dependencias
+      # Ajusta la ruta si la solución no está en la raíz exacta
+      run: dotnet restore "**/*.sln"
+
+    - name: Compilar el proyecto
+      run: dotnet build "**/*.sln" --configuration ${{ matrix.configuration }} --no-restore
+
+    # (Opcional) Ejecutar pruebas si tienes un proyecto de Unit Tests
+    - name: Ejecutar pruebas
+      run: dotnet test "**/*.sln" --configuration ${{ matrix.configuration }} --no-build --verbosity normal
+
+    - name: Publicar la aplicación (Solo Release)
+      if: matrix.configuration == 'Release'
+      run: dotnet publish "**/*.csproj" -c Release -o ./publish /p:UseAppHost=true
+
+    - name: Subir Artefacto (Ejecutable)
+      if: matrix.configuration == 'Release'
+      uses: actions/upload-artifact@v4
+      with:
+        name: JuegosDAM-App
+        path: ./publish
