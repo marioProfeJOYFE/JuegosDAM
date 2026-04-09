@@ -12,7 +12,7 @@ using System.Windows.Shapes;
 namespace JuegosDAM
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for MainWindow.xaml Cambios
     /// </summary>
     public partial class MainWindow : Window
     {
