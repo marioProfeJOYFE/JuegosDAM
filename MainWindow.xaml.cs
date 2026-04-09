@@ -11,7 +11,7 @@ namespace JuegosDAM
             InitializeComponent();
         }
 
-        // Permite mover la ventana al hacer clic sostenido en el fondo
+        // Permite mover la ventana al hacer clic sostenido en el fondo.
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             // Solo arrastra si se está haciendo clic con el botón izquierdo
