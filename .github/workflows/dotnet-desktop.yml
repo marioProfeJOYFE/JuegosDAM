@@ -30,7 +30,8 @@ jobs:
       run: dotnet build --configuration ${{ matrix.configuration }} --no-restore
 
     - name: Publicar la aplicación
-      run: dotnet publish -c Release -o ./publish /p:UseAppHost=true
+      # Añadimos -r win-x64 (para Windows 64 bits) y --self-contained true
+      run: dotnet publish -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -o ./publish
 
     - name: Compilar Instalador con Inno Setup
       uses: Minionguyjpro/Inno-Setup-Action@v1.2.7
