@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:JuegosDAM"
+        xmlns:vm="clr-namespace:JuegosDAM.MVVM.ViewModel"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Border CornerRadius="30">
@@ -126,31 +127,10 @@
             <Border Style="{ StaticResource GlassPanelStyle}"
                     Margin="10"
                     Grid.Column="1">
-                <StackPanel 
-                    Orientation="Vertical"
-                    Margin="10"
-                    >
-                    <TextBlock 
-                        Text="Biblioteca de Juegos"
-                        Style="{StaticResource TitleTextStyle}"/>
-
-                    <TextBlock
-                        Margin="0,10,0,0"
-                        Text="Aquí encontrarás todos tus títulos"
-                        FontSize="16"
-                        FontWeight="Medium"/>
-
-                    <Image
-                        Width="70"
-                        Height="70"
-                        Stretch="UniformToFill"
-                        />
-
-                    <ItemsControl>
-
-                    </ItemsControl>
-
-                </StackPanel>
+                <Frame 
+                    x:Name="MainFrame"
+                    NavigationUIVisibility="Hidden"
+                    />
             </Border>
         </Grid>
     </Border>
