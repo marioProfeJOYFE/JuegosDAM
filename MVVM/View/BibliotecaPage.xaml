@@ -39,6 +39,13 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Margin="8" Cursor="Hand">
+                            <StackPanel.InputBindings>
+                                <MouseBinding 
+                                    MouseAction="LeftClick"
+                                    Command="{ Binding DataContext.VerDetalleCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                    CommandParameter="{Binding}"
+                                    />
+                            </StackPanel.InputBindings>
                             <Border CornerRadius="18"
                                     Background="Beige"
                                     Height="130"

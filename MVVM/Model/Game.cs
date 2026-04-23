@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace JuegosDAM.MVVM.Model
 {
-    internal class Game
+    public class Game
     {
 
         public int id { get; set; }

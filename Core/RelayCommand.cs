@@ -35,4 +35,37 @@ namespace JuegosDAM.Core
             _execute(parameter);
         }
     }
+
+    public class RelayCommand<T> : ICommand
+    {
+        private readonly Action<T> _execute;
+        private readonly Func<T, bool>? _canExecute;
+
+        // Constructor
+        public RelayCommand(Action<T> execute, Func<T, bool>? canExecute = null)
+        {
+            _execute = execute;
+            _canExecute = canExecute;
+        }
+
+        // Evento que notifica a la vista cuando la condición de CanExecute cambia.
+        // CommandManager.RequerySuggested hace que WPF reevalúe los comandos automáticamente.
+        public event EventHandler CanExecuteChanged
+        {
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested -= value; }
+        }
+
+        // Determina si el comando puede ejecutarse
+        public bool CanExecute(object? parameter)
+        {
+            return parameter is T t ? (_canExecute?.Invoke(t) ?? true) : false;
+        }
+
+        // Ejecuta la lógica del comando
+        public void Execute(object? parameter)
+        {
+            if (parameter is T t) _execute(t);
+        }
+    }
 }

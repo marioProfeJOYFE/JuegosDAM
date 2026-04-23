@@ -1,22 +1,40 @@
 ﻿using JuegosDAM.Core;
 using JuegosDAM.MVVM.Model;
+using JuegosDAM.MVVM.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace JuegosDAM.MVVM.ViewModel
 {
     public class BibliotecaViewModel : ViewModelBase
     {
-        private ObservableCollection<Game> ListaJuegos { get; set; }
+        private ObservableCollection<Game> _listaJuegos = [];
+
+        public ICommand VerDetalleCommand { get; }
+
+        public ObservableCollection<Game> ListaJuegos
+        {
+            get => _listaJuegos;
+            set
+            {
+                _listaJuegos = value;
+                OnPropertyChanged();
+            }
+
+        }
 
         public BibliotecaViewModel( INavigationService navigationService) : base(navigationService)
         {
 
             ListaJuegos = new ObservableCollection<Game>();
+
+            //Enlazar VerDetalleCommand a RelayCommand para ejecutar la accion desde interfaz, y definir que hacer
+            VerDetalleCommand = new RelayCommand<Game>(VerDetalle);
 
             ListaJuegos.Add(
                 new Game(
@@ -34,5 +52,14 @@ namespace JuegosDAM.MVVM.ViewModel
                 )
             );
         }
+
+
+        public void VerDetalle(Game juegoSeleccionado)
+        {
+            DetalleJuegoViewModel vm = new DetalleJuegoViewModel(juegoSeleccionado, NavigationService);
+            NavigationService.NavigateTo(new DetalleJuegoPage(vm));
+        }
+
+
     }
 }
